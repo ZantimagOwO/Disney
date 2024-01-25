@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Update Jest
+      run: npm install --save-dev jest@latest
     - name: Checkout code
       uses: actions/checkout@v2
 
