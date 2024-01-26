@@ -7,13 +7,13 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return "tyjsfds" 
+    return "Conexion exitosa" 
     //return this.appService.getHello();
   }
 
   @Get('cosa')
   getMiGet(): string {
-    return "Hola" 
+    return "Hola";
     //return this.appService.getHello();
   }
 

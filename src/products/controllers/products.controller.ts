@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query, Post, Body, Put, Delete, ParseIntPipe } from '@nestjs/common';
-import { ProductsService } from '../services/products.service';
 import { CreaProductDTO, UpdateProductDTO } from '../dto/product.dto';
+import { ProductsService } from '../services/products.service';
 
 @Controller('products')
 export class ProductsController {
@@ -8,7 +8,7 @@ export class ProductsController {
     @Get('query')
     getProducts(@Query('limit') limit, @Query('offset') offset){
         //return `limit ${limit} offset ${offset}`
-        return this.productService.findAll(1);
+        return this.productService.findAll(); //quitado de aqui un 1 dentro del findAll() --> findAll()
     }
     
     @Get(':idProduct')
