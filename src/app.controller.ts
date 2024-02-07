@@ -7,25 +7,21 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return "Conexion exitosa" 
-    //return this.appService.getHello();
+    return this.appService.getHello();
   }
 
-  @Get('cosa')
-  getMiGet(): string {
-    return "Hola";
-    //return this.appService.getHello();
+  @Get('nuevo')
+  newEndpoint() {
+    return 'yo soy nuevo';
   }
 
-
-  @Get('categories/:idCategory/products/:idProduct')
-  getCategory(@Param() {idCategory, idProduct}){
-    
-    return `Categoría ${idCategory} producto ${idProduct} obtenidos`
+  @Get('/ruta/')
+  hello() {
+    return 'con /sas/';
   }
 
-
-
-
-
+  @Get('/tasks')
+  tasks(){
+    return this.appService.getTasks();
+  }
 }

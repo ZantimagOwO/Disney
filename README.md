@@ -1,7 +1,7 @@
 Version postgres: 16.1
 pass: lucas
 
-url temporal: jdbc:postgresql://database-1.cdh3eihdpugy.us-east-1.rds.amazonaws.com:5432/postgres
+url temporal: database-1.cdh3eihdpugy.us-east-1.rds.amazonaws.com
 
 Instalar
 npm i -g @nestjs/cli

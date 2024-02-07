@@ -1,49 +1,72 @@
-import { Controller, Get, Param, Query, Post, Body, Put, Delete, ParseIntPipe } from '@nestjs/common';
-import { CreaProductDTO, UpdateProductDTO } from '../dto/product.dto';
-import { ProductsService } from '../services/products.service';
+import {
+  Controller,
+  Get,
+  Query,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  HttpStatus,
+  HttpCode,
+  Res,
+  // ParseIntPipe,
+} from '@nestjs/common';
+import { Response } from 'express';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
+import { ParseIntPipe } from '../../common/parse-int.pipe';
+import { CreateProductDto, UpdateProductDto } from '../dtos/products.dtos';
+import { ProductsService } from './../services/products.service';
+
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
-    constructor (private productService : ProductsService){}
-    @Get('query')
-    getProducts(@Query('limit') limit, @Query('offset') offset){
-        //return `limit ${limit} offset ${offset}`
-        return this.productService.findAll(); //quitado de aqui un 1 dentro del findAll() --> findAll()
-    }
-    
-    @Get(':idProduct')
-    getProduct(@Param('idProduct', ParseIntPipe) idProduct: string){
-      let product:String = `{id:${idProduct}}`
-      //return `product ${product}`
-      return this.productService.findOne(+idProduct)
-    }
+  constructor(private productsService: ProductsService) {}
 
-    @Post('ruta')
-    create(@Body() newProduct: CreaProductDTO){
+  @Get()
+  @ApiOperation({ summary: 'List of products' })
+  getProducts(
+    @Query('limit') limit = 100,
+    @Query('offset') offset = 0,
+    @Query('brand') brand: string,
+  ) {
+    // return {
+    //   message: `products limit=> ${limit} offset=> ${offset} brand=> ${brand}`,
+    // };
+    return this.productsService.findAll();
+  }
 
-        // return {
-        //     message: 'a'
-        // }
+  @Get('filter')
+  getProductFilter() {
+    return `yo soy un filter`;
+  }
 
-        return this.productService.create(newProduct)
-    }
+  @Get(':productId')
+  @HttpCode(HttpStatus.ACCEPTED)
+  getOne(@Param('productId', ParseIntPipe) productId: number) {
+    // response.status(200).send({
+    //   message: `product ${productId}`,
+    // });
+    return this.productsService.findOne(productId);
+  }
 
-    @Post()
-    create2(@Body() product){
-            return {
-                product,
-                message: 'Producto creado'
-            }
-    }
+  @Post()
+  create(@Body() payload: CreateProductDto) {
+    // return {
+    //   message: 'accion de crear',
+    //   payload,
+    // };
+    return this.productsService.create(payload);
+  }
 
-    @Put(':id')
-    update(@Param('id') id, @Body() product: UpdateProductDTO){
-        return this.productService.update(id, product)
-    }
+  @Put(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() payload: UpdateProductDto) {
+    return this.productsService.update(id, payload);
+  }
 
-    @Delete(':id')
-    delete(@Param() id: number){
-        //return "borrado el prod" + id
-        return this.productService.delete(id)
-    }
+  @Delete(':id')
+  delete(@Param('id' ,ParseIntPipe) id: number) {
+    return this.productsService.remove(id);
+  }
 }
