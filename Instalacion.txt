@@ -3,6 +3,7 @@ npm i -g @nestjs/cli
 npm i --save-dev ts-node
 npm i --save class-validator class-transformer
 npm i jest -D
+npm install --save @nestjs/typeorm@7.1.5 typeorm@0.2.31
 
 Node
 npm run start:dev
