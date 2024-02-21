@@ -1,0 +1,21 @@
+Instalar
+npm i -g @nestjs/cli
+npm i --save-dev ts-node
+npm i --save class-validator class-transformer
+npm i jest -D
+
+Node
+npm run start:dev
+
+TypeScript
+npx ts-node archivo.ts
+
+
+Extensiones
+ES7 React/Redux/GraphQL
+Material Icon Theme
+Prettier TypeScript Errors
+
+VS Code
+save on format
+auto closing bracket
