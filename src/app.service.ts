@@ -14,7 +14,7 @@ export class AppService {
   getHello(): string {
     const apiKey = this.configService.apiKey;
     const name = this.configService.database.name;
-    return `Hello World! ${apiKey} ${name}`;
+    return `Hello World!`;
   }
   getTasks(){
     // Todo se maneja como promesas, tiene que haber un retorno hacia el Controller
